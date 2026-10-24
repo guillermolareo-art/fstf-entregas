@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Guía del Trabajo Tutelado</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: una columna de lectura en el móvil, dos pestañas (E2 / E3) bajo una barra fija. */
+:root{
+  --tinta:#15191E;
+  --tinta-suave:#55606E;
+  --papel:#FFFFFF;
+  --papel-hundido:#F2F5F9;
+  --azul:#0A5FA0;
+  --azul-claro:#E6F0F9;
+  --naranja:#C25A12;
+  --naval:#0A1628;
+  --naval-texto:#F4D9BE;
+  --rojo:#A5402F;
+  --borde:#D4DCE6;
+  --display:'Archivo','Segoe UI',Calibri,sans-serif;
+  --cuerpo:'Source Sans 3',Calibri,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --tinta:#E8ECF2; --tinta-suave:#9FACBC; --papel:#10151B; --papel-hundido:#1A212A;
+    --azul:#6FB3E8; --azul-claro:#17293A; --naranja:#F0A264; --naval:#060D16;
+    --naval-texto:#F0C79B; --rojo:#E88E7C; --borde:#2A3542; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --tinta:#E8ECF2; --tinta-suave:#9FACBC; --papel:#10151B; --papel-hundido:#1A212A;
+  --azul:#6FB3E8; --azul-claro:#17293A; --naranja:#F0A264; --naval:#060D16;
+  --naval-texto:#F0C79B; --rojo:#E88E7C; --borde:#2A3542; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--papel);color:var(--tinta);font-family:var(--cuerpo);
+  font-size:17px;line-height:1.5;margin:0;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+  z-index:20;background:var(--naval)}
+
+/* cabecera */
+.cab{background:var(--naval);color:#fff}
+.cab-in,.barra-in,main,.pie-in{
+  max-width:40rem;margin:0 auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px))}
+.cab-in{padding-block:20px 18px}
+.cab .ojo{font-family:var(--display);font-size:11px;font-weight:700;letter-spacing:.11em;
+  text-transform:uppercase;color:#E8A765;margin:0 0 6px}
+.cab h1{font-family:var(--display);font-size:27px;font-weight:600;line-height:1.15;
+  margin:0;text-wrap:balance}
+.cab p{margin:8px 0 0;font-size:15px;color:#B9C8D8}
+.franja{height:4px;background:var(--rojo)}
+
+/* pestañas */
+.barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;
+  background:var(--papel);border-bottom:1px solid var(--borde)}
+.barra-in{display:flex;gap:8px;padding-block:9px}
+.pes{flex:1;min-width:0;font-family:var(--display);font-size:14px;font-weight:600;
+  padding:11px 8px;border:1px solid var(--borde);border-radius:7px;background:var(--papel-hundido);
+  color:var(--tinta-suave);cursor:pointer;line-height:1.2}
+.pes[aria-selected="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+.pes:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
+
+main{padding-block:22px 36px}
+h2{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--azul);margin:30px 0 10px;text-wrap:balance}
+h2:first-of-type{margin-top:4px}
+h2 .peso{display:block;font-size:13px;font-weight:500;letter-spacing:0;
+  text-transform:none;color:var(--tinta-suave);margin-top:3px}
+p{margin:0 0 12px}
+b,strong{font-weight:700}
+ol,ul{margin:0 0 14px;padding-left:1.25em}
+li{margin-bottom:7px}
+li::marker{color:var(--azul);font-weight:700}
+
+.titulo-ent{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.2;
+  margin:0 0 4px;text-wrap:balance}
+.titulo-ent em{font-style:normal;color:var(--naranja)}
+.dato{font-size:14px;color:var(--tinta-suave);margin:0 0 10px;
+  font-variant-numeric:tabular-nums}
+.plazo{display:flex;gap:9px;align-items:baseline;background:var(--papel-hundido);
+  border-left:4px solid var(--rojo);border-radius:0 7px 7px 0;padding:11px 14px;
+  margin:0 0 22px;font-size:16px}
+.plazo::before{content:"⏱";flex:none;font-size:17px;line-height:1}
+
+/* apartados */
+.ap{border:1px solid var(--borde);border-radius:9px;margin:0 0 10px;overflow:hidden;
+  background:var(--papel)}
+.ap-cab{display:flex;gap:11px;align-items:baseline;padding:12px 14px;background:var(--papel-hundido)}
+.ap-n{font-family:var(--display);font-size:15px;font-weight:700;color:var(--azul);
+  font-variant-numeric:tabular-nums}
+.ap-t{font-family:var(--display);font-size:16px;font-weight:600;min-width:0}
+.ap-c{padding:12px 14px}
+.ap-c p{margin:0}
+.fallo{display:flex;gap:9px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--borde);
+  color:var(--rojo);font-size:15px}
+.fallo span:first-child{flex:none;font-family:var(--display);font-size:11px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;padding-top:3px}
+
+/* cajas */
+.caja{background:var(--azul-claro);border-left:4px solid var(--azul);
+  padding:13px 15px;border-radius:0 7px 7px 0;margin:0 0 16px}
+.caja p:last-child{margin-bottom:0}
+.naval{background:var(--naval);color:var(--naval-texto);padding:14px 16px;
+  border-radius:8px;margin:18px 0;font-size:16px}
+.naval p{margin:0}
+.avisos{border-left:4px solid var(--naranja);background:var(--papel-hundido);
+  padding:13px 15px 4px;border-radius:0 7px 7px 0}
+.avisos li::marker{color:var(--naranja)}
+
+/* lista con casillas */
+.check{list-style:none;padding:0;margin:0}
+.check li{margin:0;border-bottom:1px solid var(--borde)}
+.check li:last-child{border-bottom:0}
+.check label{display:flex;gap:11px;align-items:flex-start;padding:11px 2px;cursor:pointer}
+.check input{flex:none;width:21px;height:21px;margin:1px 0 0;accent-color:var(--azul)}
+.check input:checked + span{color:var(--tinta-suave);text-decoration:line-through}
+.reset{font-family:var(--cuerpo);font-size:14px;background:none;border:0;padding:8px 0 0;
+  color:var(--azul);cursor:pointer;text-decoration:underline}
+
+.pie{background:var(--papel-hundido);border-top:1px solid var(--borde)}
+.pie-in{padding-block:18px 26px;font-size:14px;color:var(--tinta-suave)}
+.pie-in p{margin:0 0 6px}
+@media (prefers-reduced-motion:no-preference){
+  .vista{animation:ap .18s ease-out}
+  @keyframes ap{from{opacity:.4}to{opacity:1}}
+}
+</style>
+</head>
+<body>
+
+
+<header class="cab">
+  <div class="cab-in">
+    <p class="ojo">FSTF 2026-2027 · Trabajo Tutelado</p>
+    <h1>Lo que hay que entregar</h1>
+    <p>Las dos entregas que quedan: 6 % y 8 % de la nota. Esta es la misma hoja que tenéis en PDF en Moovi.</p>
+  </div>
+</header>
+<div class="franja"></div>
+
+<nav class="barra" aria-label="Entregas">
+  <div class="barra-in" role="tablist">
+    <button class="pes" id="tab-e2" role="tab" aria-controls="e2" aria-selected="true">Entrega 2 · 6 %</button>
+    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ════════════════ ENTREGA 2 ════════════════ -->
+<section class="vista" id="e2" role="tabpanel" aria-labelledby="tab-e2">
+  <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 2 — <em>decidir cómo se fabrica la pieza</em></h2>
+  <p class="dato">6 % de la nota · 6 páginas de contenido · un solo PDF sobre la plantilla</p>
+  <p class="plazo"><b>Hasta el domingo 1 de noviembre, 23:55.</b> Después, Moovi no admite la subida.</p>
+
+  <h2>Antes de abrir la plantilla <span class="peso">Quince minutos de grupo, y ahorráis dos tardes</span></h2>
+  <ol>
+    <li><b>Elegid UNA pieza.</b> Con nombre y material: «el cuerpo de la válvula de fondo del circuito de refrigeración, en bronce», no «una válvula».</li>
+    <li><b>Escribid la pregunta del trabajo en una frase.</b> Si solo tiene una respuesta posible, no es una decisión: cambiad la pieza o el enfoque.</li>
+    <li><b>Repartid una decisión completa por persona</b>, no un trozo del documento. Cada uno firma su apartado en Confluence.</li>
+  </ol>
+
+  <h2>Qué va en cada apartado</h2>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">1</span><span class="ap-t">La pieza</span></div>
+    <div class="ap-c">
+      <p>Componente, sistema del que forma parte, material, condiciones a bordo, los epígrafes del temario que tocáis y de dónde sacáis los datos.</p>
+      <p class="fallo"><span>El fallo</span><span>Dar el conjunto entero en vez de una pieza.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">2</span><span class="ap-t">Tres formas de fabricarla</span></div>
+    <div class="ap-c">
+      <p>Tres rutas <b>completas</b> —proceso primario, secundario y acabado— y la matriz con los siete criterios, puntuando de 1 a 3 con una línea de por qué en cada casilla.</p>
+      <p class="fallo"><span>El fallo</span><span>Poner dos rutas reales y una de relleno.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">3</span><span class="ap-t">Cuál elegís</span></div>
+    <div class="ap-c">
+      <p>La ruta elegida, y cinco líneas por cada una de las dos descartadas diciendo por qué se descarta.</p>
+      <p class="fallo"><span>El fallo</span><span>Descartar sin razón técnica. Eso no puntúa.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">4</span><span class="ap-t">Contraste con la IA</span></div>
+    <div class="ap-c">
+      <p>Seis filas. Más abajo está cómo se rellenan.</p>
+      <p class="fallo"><span>El fallo</span><span>Marcar las seis como verdad sin comprobar nada.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">5</span><span class="ap-t">Quién ha hecho qué</span></div>
+    <div class="ap-c">
+      <p>Un integrante, una decisión, un nivel AIAS. Más las tres líneas de nota de alcance.</p>
+      <p class="fallo"><span>El fallo</span><span>Un solo nivel AIAS para todo el grupo.</span></p>
+    </div>
+  </div>
+
+  <h2>Los siete criterios de la matriz <span class="peso">Los mismos para todos los grupos</span></h2>
+  <div class="caja">
+    <p>Geometría y espesores · Material · Unidad o serie · Tolerancias exigidas · Medios disponibles en arsenal · Plazo · Coste relativo</p>
+    <p>No se añaden ni se quitan. Cada casilla lleva una nota de 1 a 3 y debajo una línea de por qué.</p>
+  </div>
+
+  <h2>Cómo se hace el contraste con la IA</h2>
+  <ol>
+    <li>Preguntad a una IA por las tres formas de fabricar vuestra pieza.</li>
+    <li>Partid su respuesta en <b>seis afirmaciones</b>, una por fila, copiadas tal cual.</li>
+    <li>Juzgad cada una: <b>verdad</b>, <b>suposición</b> o <b>falso</b>.</li>
+    <li>Si os dio una fuente, pegadla y comprobadla: <b>sí existe</b>, <b>no existe</b>, o <b>existe pero no dice eso</b>. Esta última es la más frecuente.</li>
+    <li>En la última columna, qué ponéis vosotros en su lugar.</li>
+  </ol>
+  <div class="naval"><p>⚓ Encontrar fuentes falsas puntúa, no penaliza. Si la IA no os dio ninguna fuente, escribidlo: también es un resultado.</p></div>
+
+  <h2>Antes de subirla</h2>
+  <ul class="check" data-lista="e2">
+    <li><label><input type="checkbox" id="e2c1"><span>Una sola pieza, con material</span></label></li>
+    <li><label><input type="checkbox" id="e2c2"><span>Tres rutas completas y la matriz entera</span></label></li>
+    <li><label><input type="checkbox" id="e2c3"><span>Los dos descartes razonados</span></label></li>
+    <li><label><input type="checkbox" id="e2c4"><span>Las seis filas del contraste con la IA</span></label></li>
+    <li><label><input type="checkbox" id="e2c5"><span>Un nivel AIAS por integrante</span></label></li>
+    <li><label><input type="checkbox" id="e2c6"><span>Las tres líneas de nota de alcance</span></label></li>
+    <li><label><input type="checkbox" id="e2c7"><span>Seis páginas de contenido o menos</span></label></li>
+    <li><label><input type="checkbox" id="e2c8"><span>Cada apartado firmado en Confluence</span></label></li>
+  </ul>
+  <button class="reset" data-reset="e2">Desmarcar todo</button>
+
+  <div class="caja" style="margin-top:20px">
+    <p><b>Se entrega</b> un solo PDF en Moovi, llamado <b>E2_G##_PrimerApellido.pdf</b>. El documento vivo se queda en Confluence: lo que no esté firmado allí no se evalúa.</p>
+  </div>
+</section>
+
+<!-- ════════════════ ENTREGA 3 ════════════════ -->
+<section class="vista" id="e3" role="tabpanel" aria-labelledby="tab-e3" hidden>
+  <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 3 — <em>cómo se fabrica, con detalle</em></h2>
+  <p class="dato">8 % de la nota · 15 páginas de contenido · un solo PDF sobre la plantilla</p>
+  <p class="plazo">Fecha de entrega <b>por confirmar</b>. Se anunciará en Moovi.</p>
+
+  <h2>Lo primero de todo</h2>
+  <div class="caja">
+    <p>Leed las correcciones de vuestra E2 y <b>metedlas</b>. La E3 no es un tema nuevo ni el capítulo siguiente: es la misma pieza y la misma ruta, desarrolladas y corregidas. Si vuestra ruta cambió, decidlo y explicad por qué.</p>
+  </div>
+
+  <h2>Qué va en cada apartado</h2>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">1</span><span class="ap-t">Plano y hoja de procesos</span></div>
+    <div class="ap-c">
+      <p>Plano acotado y tabla con operación, máquina, utillaje, parámetros y tiempo. Si algo va a CNC, decid qué, con qué amarre y con qué estrategia.</p>
+      <p class="fallo"><span>El fallo</span><span>Una lista de operaciones sin máquina ni parámetros.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">2</span><span class="ap-t">Cómo se comprueba</span></div>
+    <div class="ap-c">
+      <p>Cota, tolerancia, instrumento, fase y criterio de aceptación. Al menos una tolerancia geométrica.</p>
+      <p class="fallo"><span>El fallo</span><span>«Se mide con calibre», sin decir qué cota ni con qué criterio.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">3</span><span class="ap-t">Unión, montaje y defectos</span></div>
+    <div class="ap-c">
+      <p>Tipo de unión, preparación, defecto esperable y el ensayo no destructivo que lo detecta.</p>
+      <p class="fallo"><span>El fallo</span><span>Listar defectos sin decir cómo se detectan.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">4</span><span class="ap-t">Lote y coste</span></div>
+    <div class="ap-c">
+      <p>Qué cambia si hay que hacer veinte, y fabricar frente a comprar.</p>
+      <p class="fallo"><span>El fallo</span><span>Dar un precio sin fuente.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">5</span><span class="ap-t">Aplicabilidad</span></div>
+    <div class="ap-c">
+      <p><b>El apartado que más pesa: 35 % de la nota de esta entrega.</b> Las tres preguntas están justo debajo.</p>
+      <p class="fallo"><span>El fallo</span><span>No ponerlo. Pasó en las trece propuestas de la E1.</span></p>
+    </div>
+  </div>
+
+  <div class="ap">
+    <div class="ap-cab"><span class="ap-n">6</span><span class="ap-t">Contraste con la IA y cierre</span></div>
+    <div class="ap-c">
+      <p>Las seis filas, esta vez sobre la aplicabilidad. Más reparto, nivel AIAS por integrante, nota de alcance y anexo de prompts.</p>
+      <p class="fallo"><span>El fallo</span><span>Entregar los prompts sin decir qué hubo que corregir.</span></p>
+    </div>
+  </div>
+
+  <h2>El apartado que más pesa <span class="peso">Un párrafo por pregunta, y una conclusión en vez de una posibilidad</span></h2>
+  <ol>
+    <li><b>¿Se puede fabricar o reparar esta pieza en el arsenal?</b> Con qué medios en concreto.</li>
+    <li><b>¿Y a bordo, en navegación?</b> Con qué medios, y qué haría falta que no haya.</li>
+    <li><b>¿Qué queda descartado, y por qué?</b></li>
+  </ol>
+  <div class="caja">
+    <p><b>Sirve:</b> «En el arsenal sí, con horno de inducción y torno CNC; a bordo no, porque la colada exige un horno que el buque no lleva. Quedaría descartado el mecanizado desde macizo por el desperdicio de bronce.»</p>
+    <p><b>No sirve:</b> «Sería posible fabricarla con los medios adecuados.»</p>
+  </div>
+
+  <h2>Antes de subirla</h2>
+  <ul class="check" data-lista="e3">
+    <li><label><input type="checkbox" id="e3c1"><span>Las correcciones de la E2, metidas</span></label></li>
+    <li><label><input type="checkbox" id="e3c2"><span>Plano acotado legible</span></label></li>
+    <li><label><input type="checkbox" id="e3c3"><span>Hoja de procesos con máquina y parámetros</span></label></li>
+    <li><label><input type="checkbox" id="e3c4"><span>Una tolerancia geométrica como mínimo</span></label></li>
+    <li><label><input type="checkbox" id="e3c5"><span>Las tres preguntas de aplicabilidad, contestadas</span></label></li>
+    <li><label><input type="checkbox" id="e3c6"><span>Las seis filas del contraste con la IA</span></label></li>
+    <li><label><input type="checkbox" id="e3c7"><span>Un nivel AIAS por integrante</span></label></li>
+    <li><label><input type="checkbox" id="e3c8"><span>Anexo de prompts y qué hubo que corregir</span></label></li>
+    <li><label><input type="checkbox" id="e3c9"><span>Quince páginas de contenido o menos</span></label></li>
+    <li><label><input type="checkbox" id="e3c10"><span>Todo firmado en Confluence</span></label></li>
+  </ul>
+  <button class="reset" data-reset="e3">Desmarcar todo</button>
+
+  <h2>Lo que más nota resta, en las dos entregas</h2>
+  <div class="avisos">
+    <ul>
+      <li>No contestar a la aplicabilidad, o contestarla con un «sería posible».</li>
+      <li>Descartar rutas sin razón técnica.</li>
+      <li>Dar cifras sin fuente. Una referencia que no se puede abrir y comprobar no cuenta como fuente.</li>
+      <li>Repartir el trabajo por capítulos en vez de por decisiones.</li>
+      <li>No declarar el uso de la IA, o declarar un solo nivel para todo el grupo.</li>
+    </ul>
+  </div>
+  <div class="naval"><p>⚓ Si tenéis una duda que no resuelve esta hoja, preguntadla en clase o en el seminario. Una duda resuelta tarde es una entrega corregida a la baja.</p></div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="pie-in">
+    <p><b>Escala AIAS</b> — versión revisada de Perkins, Furze, Roe y MacVaugh. El nivel declarado no sube ni baja la nota: lo que se evalúa es que sea cierto y que lo generado esté verificado.</p>
+    <p>Fundamentos de Sistemas y Tecnologías de Fabricación · CUD-ENM · Curso 2026-2027</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var vistas = ['e2','e3'];
+  function mostrar(id, guardar){
+    vistas.forEach(function(v){
+      var sec = document.getElementById(v), tab = document.getElementById('tab-'+v);
+      var on = (v === id);
+      sec.hidden = !on;
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    if (guardar) { try { localStorage.setItem('tt-vista', id); } catch(e){} }
+  }
+  vistas.forEach(function(v){
+    document.getElementById('tab-'+v).addEventListener('click', function(){
+      mostrar(v, true);
+      window.scrollTo({top:0, behavior:'auto'});
+    });
+  });
+  var inicial = (location.hash || '').replace('#','');
+  if (vistas.indexOf(inicial) === -1) {
+    try { inicial = localStorage.getItem('tt-vista') || 'e2'; } catch(e){ inicial = 'e2'; }
+  }
+  mostrar(vistas.indexOf(inicial) === -1 ? 'e2' : inicial, false);
+
+  // casillas: se recuerdan solo en este móvil
+  var cajas = document.querySelectorAll('.check input');
+  cajas.forEach(function(c){
+    try { if (localStorage.getItem('tt-'+c.id) === '1') c.checked = true; } catch(e){}
+    c.addEventListener('change', function(){
+      try {
+        if (c.checked) localStorage.setItem('tt-'+c.id, '1');
+        else localStorage.removeItem('tt-'+c.id);
+      } catch(e){}
+    });
+  });
+  document.querySelectorAll('[data-reset]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('[data-lista="'+b.dataset.reset+'"] input').forEach(function(c){
+        c.checked = false;
+        try { localStorage.removeItem('tt-'+c.id); } catch(e){}
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
