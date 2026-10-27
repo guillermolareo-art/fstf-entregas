@@ -7,3 +7,6 @@ Se publica en: https://guillermolareo-art.github.io/fstf-entregas/
 
 Es la misma hoja que los alumnos tienen en PDF en Moovi. Se enlaza desde el QR
 de la presentación de clase.
+
+
+Este repositorio solo publica la guía para el alumnado. El seguimiento interno de los grupos y las comprobaciones de Atlassian se mantienen en un repositorio privado separado.
