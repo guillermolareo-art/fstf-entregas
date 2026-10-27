@@ -147,7 +147,8 @@ li::marker{color:var(--azul);font-weight:700}
 <nav class="barra" aria-label="Entregas">
   <div class="barra-in" role="tablist">
     <button class="pes" id="tab-e2" role="tab" aria-controls="e2" aria-selected="true">Entrega 2 · 6 %</button>
-    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button>
+    <!-- E3 oculta de momento: para reactivarla, quita este comentario y el bloque de abajo
+    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button> -->
   </div>
 </nav>
 
@@ -163,7 +164,7 @@ li::marker{color:var(--azul);font-weight:700}
   <ol>
     <li><b>Elegid UNA pieza.</b> Con nombre y material: «el cuerpo de la válvula de fondo del circuito de refrigeración, en bronce», no «una válvula».</li>
     <li><b>Escribid la pregunta del trabajo en una frase.</b> Si solo tiene una respuesta posible, no es una decisión: cambiad la pieza o el enfoque.</li>
-    <li><b>Repartid una decisión completa por persona</b>, no un trozo del documento. Cada uno firma su apartado en Confluence.</li>
+    <li><b>Repartid un criterio de la matriz por persona</b> —uno cada uno, y dos si sobran. Nadie se queda sin ninguno: si falta un criterio, falta una columna y se ve a simple vista. Cada uno firma su bloque en Confluence con <b>@sunombre</b>.</li>
   </ol>
 
   <h2>Qué va en cada apartado</h2>
@@ -179,7 +180,7 @@ li::marker{color:var(--azul);font-weight:700}
   <div class="ap">
     <div class="ap-cab"><span class="ap-n">2</span><span class="ap-t">Tres formas de fabricarla</span></div>
     <div class="ap-c">
-      <p>Tres rutas <b>completas</b> —proceso primario, secundario y acabado— y la matriz con los siete criterios, puntuando de 1 a 3 con una línea de por qué en cada casilla.</p>
+      <p>Tres rutas <b>completas</b> —proceso primario, secundario y acabado— y la matriz con los siete criterios. Cada uno puntúa <b>su</b> criterio de 1 a 3 para las tres rutas y las compara en <b>un solo párrafo de cinco a ocho líneas</b>. La matriz lleva <b>fila de total</b>.</p>
       <p class="fallo"><span>El fallo</span><span>Poner dos rutas reales y una de relleno.</span></p>
     </div>
   </div>
@@ -195,7 +196,7 @@ li::marker{color:var(--azul);font-weight:700}
   <div class="ap">
     <div class="ap-cab"><span class="ap-n">4</span><span class="ap-t">Contraste con la IA</span></div>
     <div class="ap-c">
-      <p>Seis filas. Más abajo está cómo se rellenan.</p>
+      <p>Una fila por criterio, rellenada por su dueño. Más abajo está cómo. Al final, el equipo señala en qué criterios las tres IA no coincidieron.</p>
       <p class="fallo"><span>El fallo</span><span>Marcar las seis como verdad sin comprobar nada.</span></p>
     </div>
   </div>
@@ -203,7 +204,7 @@ li::marker{color:var(--azul);font-weight:700}
   <div class="ap">
     <div class="ap-cab"><span class="ap-n">5</span><span class="ap-t">Quién ha hecho qué</span></div>
     <div class="ap-c">
-      <p>Un integrante, una decisión, un nivel AIAS. Más las tres líneas de nota de alcance.</p>
+      <p>Un integrante, un criterio, un nivel AIAS. Más las tres líneas de nota de alcance. <b>Quién ejerce de Scrum Master</b> y si hubo incidencias de acceso.</p>
       <p class="fallo"><span>El fallo</span><span>Un solo nivel AIAS para todo el grupo.</span></p>
     </div>
   </div>
@@ -216,8 +217,8 @@ li::marker{color:var(--azul);font-weight:700}
 
   <h2>Cómo se hace el contraste con la IA</h2>
   <ol>
-    <li>Preguntad a una IA por las tres formas de fabricar vuestra pieza.</li>
-    <li>Partid su respuesta en <b>seis afirmaciones</b>, una por fila, copiadas tal cual.</li>
+    <li><b>Cada uno</b> hace la misma pregunta a <b>tres IA distintas</b> sobre <b>su</b> criterio.</li>
+    <li><b>Una fila por criterio</b>, con su dueño: siete filas, como la matriz. Copiad lo que dijo tal cual y anotad <b>qué IA</b> lo dijo.</li>
     <li>Juzgad cada una: <b>verdad</b>, <b>suposición</b> o <b>falso</b>.</li>
     <li>Si os dio una fuente, pegadla y comprobadla: <b>sí existe</b>, <b>no existe</b>, o <b>existe pero no dice eso</b>. Esta última es la más frecuente.</li>
     <li>En la última columna, qué ponéis vosotros en su lugar.</li>
@@ -229,16 +230,17 @@ li::marker{color:var(--azul);font-weight:700}
     <li><label><input type="checkbox" id="e2c1"><span>Una sola pieza, con material</span></label></li>
     <li><label><input type="checkbox" id="e2c2"><span>Tres rutas completas y la matriz entera</span></label></li>
     <li><label><input type="checkbox" id="e2c3"><span>Los dos descartes razonados</span></label></li>
-    <li><label><input type="checkbox" id="e2c4"><span>Las seis filas del contraste con la IA</span></label></li>
+    <li><label><input type="checkbox" id="e2c4"><span>Una fila del contraste por criterio, con su dueño</span></label></li>
     <li><label><input type="checkbox" id="e2c5"><span>Un nivel AIAS por integrante</span></label></li>
     <li><label><input type="checkbox" id="e2c6"><span>Las tres líneas de nota de alcance</span></label></li>
     <li><label><input type="checkbox" id="e2c7"><span>Seis páginas de contenido o menos</span></label></li>
-    <li><label><input type="checkbox" id="e2c8"><span>Cada apartado firmado en Confluence</span></label></li>
+    <li><label><input type="checkbox" id="e2c8"><span>Cada bloque firmado en Confluence</span></label></li>
+    <li><label><input type="checkbox" id="e2c9"><span>Los enlaces a Confluence y a Jira en la primera página</span></label></li>
   </ul>
   <button class="reset" data-reset="e2">Desmarcar todo</button>
 
   <div class="caja" style="margin-top:20px">
-    <p><b>Se entrega</b> un solo PDF en Moovi, llamado <b>E2_G##_PrimerApellido.pdf</b>. El documento vivo se queda en Confluence: lo que no esté firmado allí no se evalúa.</p>
+    <p><b>Se entrega</b> un solo PDF en Moovi, llamado E2 + vuestro grupo + FSTF2627 —por ejemplo <b>E2G11FSTF2627.pdf</b>—, con <b>el enlace a vuestra página de Confluence y el enlace a vuestro Jira en la primera página</b>. El documento vivo se queda en Confluence: lo que no esté firmado allí no se evalúa, y el <b>historial de versiones</b> es la prueba de quién hizo qué. Trabajad repartido en varios días, no todo de una sentada.</p>
   </div>
 </section>
 
@@ -353,7 +355,7 @@ li::marker{color:var(--azul);font-weight:700}
 
 <script>
 (function(){
-  var vistas = ['e2','e3'];
+  var vistas = ['e2'];   // E3 oculta de momento: añade 'e3' para reactivarla
   function mostrar(id, guardar){
     vistas.forEach(function(v){
       var sec = document.getElementById(v), tab = document.getElementById('tab-'+v);
