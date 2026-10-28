@@ -129,6 +129,10 @@ li::marker{color:var(--azul);font-weight:700}
 
 /* tablas de criterios, matriz y escala aias */
 .tabla-wrap{overflow-x:auto;margin:14px 0 18px;border:1px solid var(--borde);border-radius:8px;-webkit-overflow-scrolling:touch}
+.tabla-wrap::-webkit-scrollbar{height:6px}
+.tabla-wrap::-webkit-scrollbar-track{background:var(--papel-hundido);border-radius:4px}
+.tabla-wrap::-webkit-scrollbar-thumb{background:var(--borde);border-radius:4px}
+
 .tabla-matriz, .tabla-criterios, .tabla-aias{width:100%;border-collapse:collapse;font-size:14px;background:var(--papel);text-align:left}
 .tabla-matriz th, .tabla-matriz td, .tabla-criterios th, .tabla-criterios td, .tabla-aias th, .tabla-aias td{padding:10px 12px;border-bottom:1px solid var(--borde)}
 .tabla-matriz th, .tabla-criterios th, .tabla-aias th{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--papel-hundido);color:var(--azul)}
@@ -137,10 +141,73 @@ li::marker{color:var(--azul);font-weight:700}
 .tabla-matriz th.th-ruta, .tabla-matriz td:first-child{text-align:left}
 .tabla-matriz td.td-total, .tabla-matriz th.th-total{background:var(--azul-claro);color:var(--azul);font-weight:700}
 .tabla-matriz tr:last-child td, .tabla-criterios tr:last-child td, .tabla-aias tr:last-child td{border-bottom:0}
-.tabla-criterios td.tc-num, .tabla-aias td.tc-num{font-family:var(--display);font-weight:700;color:var(--azul);text-align:center;width:32px}
+.tabla-criterios td.tc-num, .tabla-aias td.tc-num{font-family:var(--display);font-weight:700;color:var(--azul);text-align:center;width:36px}
 .tabla-criterios td.tc-nombre, .tabla-aias td.tc-nombre{font-family:var(--display);font-weight:600;color:var(--tinta);min-width:140px}
 .tabla-criterios tr:nth-child(even), .tabla-aias tr:nth-child(even){background:var(--papel-hundido)}
 .nota-ejemplo{font-size:13px;color:var(--tinta-suave);margin-top:6px;margin-bottom:14px}
+
+.desliza-aviso{display:none;align-items:center;gap:6px;font-family:var(--display);font-size:12px;font-weight:600;color:var(--azul);margin:0 0 6px 2px}
+
+/* Optimización móvil y tablet */
+@media (max-width: 680px){
+  .desliza-aviso{display:flex}
+  
+  /* Matriz: columna de Ruta fija a la izquierda y scroll horizontal cómodo */
+  .tabla-matriz th, .tabla-matriz td{padding:9px 8px;font-size:13px;white-space:nowrap}
+  .tabla-matriz th.th-ruta, .tabla-matriz td:first-child{
+    position:sticky;left:0;z-index:2;background:var(--papel);
+    box-shadow:2px 0 6px rgba(0,0,0,0.08);white-space:normal;
+    min-width:125px;max-width:145px;font-size:12.5px;line-height:1.25;
+  }
+  .tabla-matriz th.th-ruta{background:var(--papel-hundido);z-index:3}
+  
+  /* Tarjetas móviles para Criterios y Escala AIAS */
+  .tabla-wrap:has(.tabla-cards){border:none;background:transparent;overflow:visible;margin-block:10px 14px}
+  .tabla-cards{display:block;background:transparent}
+  .tabla-cards thead{display:none}
+  .tabla-cards tbody{display:flex;flex-direction:column;gap:12px}
+  .tabla-cards tr{
+    display:block;background:var(--papel);border:1px solid var(--borde);
+    border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  }
+  .tabla-cards tr:nth-child(even){background:var(--papel)}
+  .tabla-cards td.tc-num{
+    display:inline-block;width:auto;background:var(--azul);color:#fff !important;
+    font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;
+    margin:10px 0 0 12px;border:none;
+  }
+  .tabla-cards td.tc-num::before{display:none !important}
+  .tabla-cards td.tc-nombre{
+    display:block;background:var(--papel-hundido);padding:6px 12px 10px;
+    font-size:16px;font-weight:700;color:var(--tinta);border-bottom:1px solid var(--borde);
+    margin-top:4px;
+  }
+  .tabla-cards td.tc-nombre::before{display:none !important}
+  .tabla-cards td:not(.tc-num):not(.tc-nombre){
+    display:block;padding:9px 12px;border-bottom:1px dashed var(--borde);
+    text-align:left;font-size:14.5px;line-height:1.45;
+  }
+  .tabla-cards td:last-child{border-bottom:none}
+  .tabla-cards td[data-label]::before{
+    content:attr(data-label);display:block;font-family:var(--display);
+    font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--azul);margin-bottom:3px;
+  }
+
+  /* Ajustes táctiles generales */
+  .check label{min-height:44px;align-items:center}
+  .pes{min-height:42px;display:flex;align-items:center;justify-content:center}
+}
+
+@media (max-width: 480px){
+  .cab-in, .barra-in, main, .pie-in{
+    padding-left:max(13px,env(safe-area-inset-left,0px));
+    padding-right:max(13px,env(safe-area-inset-right,0px));
+  }
+  .cab h1{font-size:23px}
+  .titulo-ent{font-size:19px}
+  .caja, .naval, .plazo{padding:11px 12px}
+}
 
 @media (prefers-reduced-motion:no-preference){
   .vista{animation:ap .18s ease-out}
@@ -231,10 +298,10 @@ li::marker{color:var(--azul);font-weight:700}
   </div>
 
   <div class="tabla-wrap">
-    <table class="tabla-criterios">
+    <table class="tabla-criterios tabla-cards">
       <thead>
         <tr>
-          <th style="text-align:center;width:36px">#</th>
+          <th style="text-align:center;width:40px">#</th>
           <th>Criterio</th>
           <th>Qué analiza en la pieza</th>
           <th>En qué debe fijarse el responsable</th>
@@ -242,52 +309,53 @@ li::marker{color:var(--azul);font-weight:700}
       </thead>
       <tbody>
         <tr>
-          <td class="tc-num">1</td>
-          <td class="tc-nombre">Geometría y espesores</td>
-          <td>Formas complejas, simetría, huecos interiores y espesores mínimos y máximos de pared.</td>
-          <td>Si exige machos/núcleos en fundición, matriz compleja en forja o desbaste excesivo en mecanizado.</td>
+          <td class="tc-num" data-label="#">1</td>
+          <td class="tc-nombre" data-label="Criterio">Geometría y espesores</td>
+          <td data-label="Qué analiza en la pieza">Formas complejas, simetría, huecos interiores y espesores mínimos y máximos de pared.</td>
+          <td data-label="En qué debe fijarse el responsable">Si exige machos/núcleos en fundición, matriz compleja en forja o desbaste excesivo en mecanizado.</td>
         </tr>
         <tr>
-          <td class="tc-num">2</td>
-          <td class="tc-nombre">Material</td>
-          <td>Idoneidad metalúrgica para el proceso primario y tratamientos posteriores.</td>
-          <td>Colabilidad, forjabilidad o maquinabilidad del material elegido; tratamientos térmicos requeridos.</td>
+          <td class="tc-num" data-label="#">2</td>
+          <td class="tc-nombre" data-label="Criterio">Material</td>
+          <td data-label="Qué analiza en la pieza">Idoneidad metalúrgica para el proceso primario y tratamientos posteriores.</td>
+          <td data-label="En qué debe fijarse el responsable">Colabilidad, forjabilidad o maquinabilidad del material elegido; tratamientos térmicos requeridos.</td>
         </tr>
         <tr>
-          <td class="tc-num">3</td>
-          <td class="tc-nombre">Unidad o serie</td>
-          <td>Volumen de fabricación requerido (pieza de repuesto unitaria vs. lote o serie corta).</td>
-          <td>Coste de preparación y amortización de utillajes (modelos de arena, matrices o utillajes dedicados).</td>
+          <td class="tc-num" data-label="#">3</td>
+          <td class="tc-nombre" data-label="Criterio">Unidad o serie</td>
+          <td data-label="Qué analiza en la pieza">Volumen de fabricación requerido (pieza de repuesto unitaria vs. lote o serie corta).</td>
+          <td data-label="En qué debe fijarse el responsable">Coste de preparación y amortización de utillajes (modelos de arena, matrices o utillajes dedicados).</td>
         </tr>
         <tr>
-          <td class="tc-num">4</td>
-          <td class="tc-nombre">Tolerancias exigidas</td>
-          <td>Calidades IT dimensionales, tolerancias geométricas y rugosidad superficial (Ra).</td>
-          <td>Qué tolerancias da el proceso primario en bruto y qué zonas obligan a sobreespesor y mecanizado fino.</td>
+          <td class="tc-num" data-label="#">4</td>
+          <td class="tc-nombre" data-label="Criterio">Tolerancias exigidas</td>
+          <td data-label="Qué analiza en la pieza">Calidades IT dimensionales, tolerancias geométricas y rugosidad superficial (Ra).</td>
+          <td data-label="En qué debe fijarse el responsable">Qué tolerancias da el proceso primario en bruto y qué zonas obligan a sobreespesor y mecanizado fino.</td>
         </tr>
         <tr>
-          <td class="tc-num">5</td>
-          <td class="tc-nombre">Medios en arsenal</td>
-          <td>Capacidad real de los talleres e instalaciones de la maestranza militar.</td>
-          <td>Si se dispone de hornos de inducción, prensas de forja o tornos y centros de mecanizado CNC.</td>
+          <td class="tc-num" data-label="#">5</td>
+          <td class="tc-nombre" data-label="Criterio">Medios en arsenal</td>
+          <td data-label="Qué analiza en la pieza">Capacidad real de los talleres e instalaciones de la maestranza militar.</td>
+          <td data-label="En qué debe fijarse el responsable">Si se dispone de hornos de inducción, prensas de forja o tornos y centros de mecanizado CNC.</td>
         </tr>
         <tr>
-          <td class="tc-num">6</td>
-          <td class="tc-nombre">Plazo</td>
-          <td>Tiempo total desde la orden hasta la pieza terminada y disponible para montaje.</td>
-          <td>Disponibilidad de material en bruto, tiempo de elaboración de modelos/matrices y ciclo de mecanizado.</td>
+          <td class="tc-num" data-label="#">6</td>
+          <td class="tc-nombre" data-label="Criterio">Plazo</td>
+          <td data-label="Qué analiza en la pieza">Tiempo total desde la orden hasta la pieza terminada y disponible para montaje.</td>
+          <td data-label="En qué debe fijarse el responsable">Disponibilidad de material en bruto, tiempo de elaboración de modelos/matrices y ciclo de mecanizado.</td>
         </tr>
         <tr>
-          <td class="tc-num">7</td>
-          <td class="tc-nombre">Coste relativo</td>
-          <td>Estimación económica comparada entre las tres rutas.</td>
-          <td>Desperdicio de material en viruta o colada, coste horario de máquinas y mano de obra necesaria.</td>
+          <td class="tc-num" data-label="#">7</td>
+          <td class="tc-nombre" data-label="Criterio">Coste relativo</td>
+          <td data-label="Qué analiza en la pieza">Estimación económica comparada entre las tres rutas.</td>
+          <td data-label="En qué debe fijarse el responsable">Desperdicio de material en viruta o colada, coste horario de máquinas y mano de obra necesaria.</td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <h2>Estructura de la matriz de decisión <span class="peso">Cada casilla puntúa de 1 a 3</span></h2>
+  <div class="desliza-aviso"><span>↔ Desliza horizontalmente para ver todos los criterios y el total</span></div>
   <div class="tabla-wrap">
     <table class="tabla-matriz">
       <thead>
@@ -364,7 +432,7 @@ li::marker{color:var(--azul);font-weight:700}
 
   <h2>Declaración de uso de IA — Escala AIAS <span class="peso">Un nivel individual por integrante, no uno para todo el grupo</span></h2>
   <div class="tabla-wrap">
-    <table class="tabla-aias">
+    <table class="tabla-aias tabla-cards">
       <thead>
         <tr>
           <th style="text-align:center;width:48px">Nivel</th>
@@ -375,34 +443,34 @@ li::marker{color:var(--azul);font-weight:700}
       </thead>
       <tbody>
         <tr>
-          <td class="tc-num">1</td>
-          <td class="tc-nombre">Sin IA</td>
-          <td>No se ha usado ninguna herramienta de IA generativa. El desarrollo del criterio o apartado es <b>íntegramente vuestro</b>.</td>
-          <td>Todo el razonamiento, cálculos y redacción son originales del alumno.</td>
+          <td class="tc-num" data-label="Nivel">1</td>
+          <td class="tc-nombre" data-label="Denominación">Sin IA</td>
+          <td data-label="Qué significa en este trabajo">No se ha usado ninguna herramienta de IA generativa. El desarrollo del criterio o apartado es <b>íntegramente vuestro</b>.</td>
+          <td data-label="Qué debéis entregar y verificar">Todo el razonamiento, cálculos y redacción son originales del alumno.</td>
         </tr>
         <tr>
-          <td class="tc-num">2</td>
-          <td class="tc-nombre">IA para planificar</td>
-          <td>Se ha usado para <b>generar o estructurar ideas</b>, lluvia de ideas o esquema inicial, pero la redacción y desarrollo técnico son vuestros.</td>
-          <td>Esquema inicial apoyado en IA; desarrollo y redacción propios.</td>
+          <td class="tc-num" data-label="Nivel">2</td>
+          <td class="tc-nombre" data-label="Denominación">IA para planificar</td>
+          <td data-label="Qué significa en este trabajo">Se ha usado para <b>generar o estructurar ideas</b>, lluvia de ideas o esquema inicial, pero la redacción y desarrollo técnico son vuestros.</td>
+          <td data-label="Qué debéis entregar y verificar">Esquema inicial apoyado en IA; desarrollo y redacción propios.</td>
         </tr>
         <tr>
-          <td class="tc-num">3</td>
-          <td class="tc-nombre">IA para ejecutar parte</td>
-          <td>Se ha usado para <b>redactar o componer fragmentos</b> específicos del apartado, evaluando críticamente y corrigiendo el resultado.</td>
-          <td>Texto o datos generados que han sido verificados; se documenta qué hubo que corregir.</td>
+          <td class="tc-num" data-label="Nivel">3</td>
+          <td class="tc-nombre" data-label="Denominación">IA para ejecutar parte</td>
+          <td data-label="Qué significa en este trabajo">Se ha usado para <b>redactar o componer fragmentos</b> específicos del apartado, evaluando críticamente y corrigiendo el resultado.</td>
+          <td data-label="Qué debéis entregar y verificar">Texto o datos generados que han sido verificados; se documenta qué hubo que corregir.</td>
         </tr>
         <tr>
-          <td class="tc-num">4</td>
-          <td class="tc-nombre">IA completa, dirigida por vosotros</td>
-          <td>Se ha usado a fondo como asistente continuo, <b>demostrando criterio técnico propio al guiarla</b> y validar cada salida.</td>
-          <td>Prompts estructurados y exhaustiva verificación de todas las afirmaciones, fuentes y rangos.</td>
+          <td class="tc-num" data-label="Nivel">4</td>
+          <td class="tc-nombre" data-label="Denominación">IA completa, dirigida por vosotros</td>
+          <td data-label="Qué significa en este trabajo">Se ha usado a fondo como asistente continuo, <b>demostrando criterio técnico propio al guiarla</b> y validar cada salida.</td>
+          <td data-label="Qué debéis entregar y verificar">Prompts estructurados y exhaustiva verificación de todas las afirmaciones, fuentes y rangos.</td>
         </tr>
         <tr>
-          <td class="tc-num">5</td>
-          <td class="tc-nombre">IA exploratoria</td>
-          <td>Se ha usado para <b>replantear radicalmente la tarea</b>: métodos o enfoques no previstos inicialmente.</td>
-          <td><em>(Habitualmente fuera del alcance de este Trabajo Tutelado).</em></td>
+          <td class="tc-num" data-label="Nivel">5</td>
+          <td class="tc-nombre" data-label="Denominación">IA exploratoria</td>
+          <td data-label="Qué significa en este trabajo">Se ha usado para <b>replantear radicalmente la tarea</b>: métodos o enfoques no previstos inicialmente.</td>
+          <td data-label="Qué debéis entregar y verificar"><em>(Habitualmente fuera del alcance de este Trabajo Tutelado).</em></td>
         </tr>
       </tbody>
     </table>
