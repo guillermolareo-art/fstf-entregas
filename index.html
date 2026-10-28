@@ -126,6 +126,22 @@ li::marker{color:var(--azul);font-weight:700}
 .pie{background:var(--papel-hundido);border-top:1px solid var(--borde)}
 .pie-in{padding-block:18px 26px;font-size:14px;color:var(--tinta-suave)}
 .pie-in p{margin:0 0 6px}
+
+/* tablas de criterios, matriz y escala aias */
+.tabla-wrap{overflow-x:auto;margin:14px 0 18px;border:1px solid var(--borde);border-radius:8px;-webkit-overflow-scrolling:touch}
+.tabla-matriz, .tabla-criterios, .tabla-aias{width:100%;border-collapse:collapse;font-size:14px;background:var(--papel);text-align:left}
+.tabla-matriz th, .tabla-matriz td, .tabla-criterios th, .tabla-criterios td, .tabla-aias th, .tabla-aias td{padding:10px 12px;border-bottom:1px solid var(--borde)}
+.tabla-matriz th, .tabla-criterios th, .tabla-aias th{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--papel-hundido);color:var(--azul)}
+.tabla-matriz td{text-align:center;font-variant-numeric:tabular-nums}
+.tabla-matriz th{text-align:center}
+.tabla-matriz th.th-ruta, .tabla-matriz td:first-child{text-align:left}
+.tabla-matriz td.td-total, .tabla-matriz th.th-total{background:var(--azul-claro);color:var(--azul);font-weight:700}
+.tabla-matriz tr:last-child td, .tabla-criterios tr:last-child td, .tabla-aias tr:last-child td{border-bottom:0}
+.tabla-criterios td.tc-num, .tabla-aias td.tc-num{font-family:var(--display);font-weight:700;color:var(--azul);text-align:center;width:32px}
+.tabla-criterios td.tc-nombre, .tabla-aias td.tc-nombre{font-family:var(--display);font-weight:600;color:var(--tinta);min-width:140px}
+.tabla-criterios tr:nth-child(even), .tabla-aias tr:nth-child(even){background:var(--papel-hundido)}
+.nota-ejemplo{font-size:13px;color:var(--tinta-suave);margin-top:6px;margin-bottom:14px}
+
 @media (prefers-reduced-motion:no-preference){
   .vista{animation:ap .18s ease-out}
   @keyframes ap{from{opacity:.4}to{opacity:1}}
@@ -158,7 +174,7 @@ li::marker{color:var(--azul);font-weight:700}
 <section class="vista" id="e2" role="tabpanel" aria-labelledby="tab-e2">
   <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 2 — <em>decidir cómo se fabrica la pieza</em></h2>
   <p class="dato">6 % de la nota · 6 páginas de contenido · un solo PDF sobre la plantilla</p>
-  <p class="plazo"><b>Hasta el lunes 2 de noviembre, 23:55.</b> Lo que entre después, Moovi lo marca como fuera de plazo.</p>
+  <p class="plazo"><b>Hasta el domingo 1 de noviembre, 23:55.</b> Después, Moovi no admite la subida.</p>
 
   <h2>Antes de abrir la plantilla <span class="peso">Quince minutos de grupo, y ahorráis dos tardes</span></h2>
   <ol>
@@ -211,8 +227,129 @@ li::marker{color:var(--azul);font-weight:700}
 
   <h2>Los siete criterios de la matriz <span class="peso">Los mismos para todos los grupos</span></h2>
   <div class="caja">
-    <p>Geometría y espesores · Material · Unidad o serie · Tolerancias exigidas · Medios disponibles en arsenal · Plazo · Coste relativo</p>
-    <p>No se añaden ni se quitan. Cada casilla lleva una nota de 1 a 3 y debajo una línea de por qué.</p>
+    <p>Los siete criterios son <b>idénticos para todos los grupos</b>: no se añaden ni se quitan. En equipos de cuatro a seis personas, <b>cada integrante se encarga de un criterio</b> (y de dos si sobran). Si falta un criterio, falta una columna entera de la matriz y se ve a simple vista.</p>
+  </div>
+
+  <div class="tabla-wrap">
+    <table class="tabla-criterios">
+      <thead>
+        <tr>
+          <th style="text-align:center;width:36px">#</th>
+          <th>Criterio</th>
+          <th>Qué analiza en la pieza</th>
+          <th>En qué debe fijarse el responsable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-num">1</td>
+          <td class="tc-nombre">Geometría y espesores</td>
+          <td>Formas complejas, simetría, huecos interiores y espesores mínimos y máximos de pared.</td>
+          <td>Si exige machos/núcleos en fundición, matriz compleja en forja o desbaste excesivo en mecanizado.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">2</td>
+          <td class="tc-nombre">Material</td>
+          <td>Idoneidad metalúrgica para el proceso primario y tratamientos posteriores.</td>
+          <td>Colabilidad, forjabilidad o maquinabilidad del material elegido; tratamientos térmicos requeridos.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">3</td>
+          <td class="tc-nombre">Unidad o serie</td>
+          <td>Volumen de fabricación requerido (pieza de repuesto unitaria vs. lote o serie corta).</td>
+          <td>Coste de preparación y amortización de utillajes (modelos de arena, matrices o utillajes dedicados).</td>
+        </tr>
+        <tr>
+          <td class="tc-num">4</td>
+          <td class="tc-nombre">Tolerancias exigidas</td>
+          <td>Calidades IT dimensionales, tolerancias geométricas y rugosidad superficial (Ra).</td>
+          <td>Qué tolerancias da el proceso primario en bruto y qué zonas obligan a sobreespesor y mecanizado fino.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">5</td>
+          <td class="tc-nombre">Medios en arsenal</td>
+          <td>Capacidad real de los talleres e instalaciones de la maestranza militar.</td>
+          <td>Si se dispone de hornos de inducción, prensas de forja o tornos y centros de mecanizado CNC.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">6</td>
+          <td class="tc-nombre">Plazo</td>
+          <td>Tiempo total desde la orden hasta la pieza terminada y disponible para montaje.</td>
+          <td>Disponibilidad de material en bruto, tiempo de elaboración de modelos/matrices y ciclo de mecanizado.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">7</td>
+          <td class="tc-nombre">Coste relativo</td>
+          <td>Estimación económica comparada entre las tres rutas.</td>
+          <td>Desperdicio de material en viruta o colada, coste horario de máquinas y mano de obra necesaria.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Estructura de la matriz de decisión <span class="peso">Cada casilla puntúa de 1 a 3</span></h2>
+  <div class="tabla-wrap">
+    <table class="tabla-matriz">
+      <thead>
+        <tr>
+          <th class="th-ruta">Ruta de fabricación</th>
+          <th>1. Geom.</th>
+          <th>2. Mat.</th>
+          <th>3. Serie</th>
+          <th>4. Toler.</th>
+          <th>5. Arsenal</th>
+          <th>6. Plazo</th>
+          <th>7. Coste</th>
+          <th class="th-total">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>A</b> · Fundición en arena + mecanizado</td>
+          <td>3</td>
+          <td>3</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
+          <td>3</td>
+          <td class="td-total">18</td>
+        </tr>
+        <tr>
+          <td><b>B</b> · Forja + mecanizado</td>
+          <td>2</td>
+          <td>3</td>
+          <td>1</td>
+          <td>3</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td class="td-total">12</td>
+        </tr>
+        <tr>
+          <td><b>C</b> · Mecanizado desde barra maciza</td>
+          <td>3</td>
+          <td>1</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td>3</td>
+          <td>1</td>
+          <td class="td-total">14</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="nota-ejemplo"><em>Ejemplo ilustrativo de clase (cuerpo de válvula de fondo en bronce). Las notas y rutas de vuestro grupo serán las propias de vuestra pieza.</em></p>
+
+  <div class="caja">
+    <p><b>Cómo se evalúa y justifica la matriz:</b></p>
+    <ul>
+      <li><b>Puntuación:</b> Cada casilla lleva una nota de <b>1 a 3</b> (1 = desfavorable, 2 = aceptable con condicionantes, 3 = idóneo o ventajoso).</li>
+      <li><b>Fila de TOTAL:</b> Obligatoria al final de la matriz para sumar los puntos obtenidos por cada ruta.</li>
+      <li><b>Justificación individual:</b> Cada responsable puntúa su criterio para las tres rutas y las compara en <b>un solo párrafo de cinco a ocho líneas</b>, firmando su bloque en Confluence con <b>@sunombre</b>.</li>
+      <li><b>Descartes:</b> Si la ruta elegida no es la de mayor puntuación total, debe explicarse técnicamente por qué.</li>
+    </ul>
   </div>
 
   <h2>Cómo se hace el contraste con la IA</h2>
@@ -224,6 +361,61 @@ li::marker{color:var(--azul);font-weight:700}
     <li>En la última columna, qué ponéis vosotros en su lugar.</li>
   </ol>
   <div class="naval"><p>⚓ Encontrar fuentes falsas puntúa, no penaliza. Si la IA no os dio ninguna fuente, escribidlo: también es un resultado.</p></div>
+
+  <h2>Declaración de uso de IA — Escala AIAS <span class="peso">Un nivel individual por integrante, no uno para todo el grupo</span></h2>
+  <div class="tabla-wrap">
+    <table class="tabla-aias">
+      <thead>
+        <tr>
+          <th style="text-align:center;width:48px">Nivel</th>
+          <th>Denominación</th>
+          <th>Qué significa en este trabajo</th>
+          <th>Qué debéis entregar y verificar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tc-num">1</td>
+          <td class="tc-nombre">Sin IA</td>
+          <td>No se ha usado ninguna herramienta de IA generativa. El desarrollo del criterio o apartado es <b>íntegramente vuestro</b>.</td>
+          <td>Todo el razonamiento, cálculos y redacción son originales del alumno.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">2</td>
+          <td class="tc-nombre">IA para planificar</td>
+          <td>Se ha usado para <b>generar o estructurar ideas</b>, lluvia de ideas o esquema inicial, pero la redacción y desarrollo técnico son vuestros.</td>
+          <td>Esquema inicial apoyado en IA; desarrollo y redacción propios.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">3</td>
+          <td class="tc-nombre">IA para ejecutar parte</td>
+          <td>Se ha usado para <b>redactar o componer fragmentos</b> específicos del apartado, evaluando críticamente y corrigiendo el resultado.</td>
+          <td>Texto o datos generados que han sido verificados; se documenta qué hubo que corregir.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">4</td>
+          <td class="tc-nombre">IA completa, dirigida por vosotros</td>
+          <td>Se ha usado a fondo como asistente continuo, <b>demostrando criterio técnico propio al guiarla</b> y validar cada salida.</td>
+          <td>Prompts estructurados y exhaustiva verificación de todas las afirmaciones, fuentes y rangos.</td>
+        </tr>
+        <tr>
+          <td class="tc-num">5</td>
+          <td class="tc-nombre">IA exploratoria</td>
+          <td>Se ha usado para <b>replantear radicalmente la tarea</b>: métodos o enfoques no previstos inicialmente.</td>
+          <td><em>(Habitualmente fuera del alcance de este Trabajo Tutelado).</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caja">
+    <p>⚓ <b>Cómo se evalúa la escala AIAS:</b></p>
+    <ul>
+      <li><b>No premia ni castiga:</b> El nivel declarado <b>no sube ni baja la nota</b>. Lo que se evalúa es que sea <b>verídico</b> y que lo generado esté <b>debidamente contrastado</b> (un 4 con fuentes verificadas tiene mejor nota que un 1 que no se sostiene).</li>
+      <li><b>Individual, no grupal:</b> Cada integrante declara <b>su propio nivel</b>, la herramienta empleada (ej. ChatGPT, Claude, Copilot) y el criterio del que responde.</li>
+      <li><b>Origen:</b> Versión adaptada de la escala AIAS revisada de Perkins, Furze, Roe y MacVaugh.</li>
+    </ul>
+  </div>
 
   <h2>Antes de subirla</h2>
   <ul class="check" data-lista="e2">
