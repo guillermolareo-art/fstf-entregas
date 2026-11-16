@@ -72,7 +72,7 @@ const n1=x=>String(x).replace('.',',');
 function card(t,qr){return `<div class="top"><div class="pieza"><h2>Equipo ${t.code}</h2><p><b>Pieza:</b> ${t.comp}</p><p><b>Rutas:</b> ${t.rutas}</p></div>
 <div class="total"><b>${n1(t.tot.toFixed(1))}</b><span>de ${n1(t.mx.toFixed(1))} en los bloques de equipo</span></div>${qr||''}</div>
 <div class="bloques">${t.bl.map(b=>`<div class="b"><div class="c" style="background:${col[b.n]}"><strong>${b.n}. ${b.name}</strong><em>${n1(b.g)} / ${n1(b.M)}</em></div><p>${b.t}</p></div>`).join('')}</div>
-<div class="e3"><b>Para la E3:</b> estas correcciones van metidas, y el recuadro «De la E2 a la E3» de la primera página dice cuáles.</div>
+<div class="e3"><b>Para la E3:</b> corregid en la E3 lo que se os señala aquí y, en la primera página del PDF de la E3, en el recuadro «De la E2 a la E3», indicad qué habéis corregido.</div>
 <p class="nota">El bloque 4 (trazabilidad, firma y AIAS) es individual y no se muestra aquí.</p>`;}
 const m=document.getElementById('m'),nav=document.getElementById('nav');
 const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
