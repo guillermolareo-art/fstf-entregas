@@ -64,6 +64,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   padding:11px 8px;border:1px solid var(--borde);border-radius:7px;background:var(--papel-hundido);
   color:var(--tinta-suave);cursor:pointer;line-height:1.2}
 .pes[aria-selected="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+.pes[disabled]{opacity:.45;cursor:not-allowed}
 .pes:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
 
 main{padding-block:22px 36px}
@@ -222,22 +223,22 @@ li::marker{color:var(--azul);font-weight:700}
   <div class="cab-in">
     <p class="ojo">FSTF 2026-2027 · Trabajo Tutelado</p>
     <h1>Lo que hay que entregar</h1>
-    <p>Las dos entregas que quedan: 6 % y 8 % de la nota. Esta es la misma hoja que tenéis en PDF en Moovi.</p>
+    <p>Queda la Entrega 3: 8 % de la nota. La E2 está cerrada.</p>
   </div>
 </header>
 <div class="franja"></div>
 
 <nav class="barra" aria-label="Entregas">
   <div class="barra-in" role="tablist">
-    <button class="pes" id="tab-e2" role="tab" aria-controls="e2" aria-selected="true">Entrega 2 · 6 %</button>
-    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button>
+    <button class="pes" id="tab-e2" role="tab" aria-controls="e2" aria-selected="false" aria-disabled="true" disabled title="Entrega cerrada">Entrega 2 · cerrada</button>
+    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="true">Entrega 3 · 8 %</button>
   </div>
 </nav>
 
 <main>
 
 <!-- ════════════════ ENTREGA 2 ════════════════ -->
-<section class="vista" id="e2" role="tabpanel" aria-labelledby="tab-e2">
+<section class="vista" id="e2" role="tabpanel" aria-labelledby="tab-e2" hidden>
   <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 2 — <em>decidir cómo se fabrica la pieza</em></h2>
   <p class="dato">6 % de la nota · 6 páginas de contenido · un solo PDF sobre la plantilla</p>
   <p class="plazo"><b>Hasta el domingo 1 de noviembre, 23:55.</b> Después, Moovi no admite la subida.</p>
@@ -503,7 +504,7 @@ li::marker{color:var(--azul);font-weight:700}
 </section>
 
 <!-- ════════════════ ENTREGA 3 ════════════════ -->
-<section class="vista" id="e3" role="tabpanel" aria-labelledby="tab-e3" hidden>
+<section class="vista" id="e3" role="tabpanel" aria-labelledby="tab-e3">
   <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 3 — <em>cómo se fabrica, con detalle</em></h2>
   <p class="dato">8 % de la nota · 15 páginas de contenido · un solo PDF sobre la plantilla</p>
   <p class="plazo"><span><b>Hasta el domingo 6 de diciembre, 23:50</b>, después del último seminario. Pasada esa hora, Moovi no admite la subida.</span></p>
@@ -751,7 +752,7 @@ li::marker{color:var(--azul);font-weight:700}
 
 <script>
 (function(){
-  var vistas = ['e2', 'e3'];
+  var vistas = ['e3'];   // la E2 está cerrada: su pestaña se ve, pero no abre
   function mostrar(id, guardar){
     vistas.forEach(function(v){
       var sec = document.getElementById(v), tab = document.getElementById('tab-'+v);
