@@ -230,8 +230,7 @@ li::marker{color:var(--azul);font-weight:700}
 <nav class="barra" aria-label="Entregas">
   <div class="barra-in" role="tablist">
     <button class="pes" id="tab-e2" role="tab" aria-controls="e2" aria-selected="true">Entrega 2 · 6 %</button>
-    <!-- E3 oculta de momento: para reactivarla, quita este comentario y el bloque de abajo
-    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button> -->
+    <button class="pes" id="tab-e3" role="tab" aria-controls="e3" aria-selected="false">Entrega 3 · 8 %</button>
   </div>
 </nav>
 
@@ -507,7 +506,21 @@ li::marker{color:var(--azul);font-weight:700}
 <section class="vista" id="e3" role="tabpanel" aria-labelledby="tab-e3" hidden>
   <h2 class="titulo-ent" style="letter-spacing:0;text-transform:none;color:var(--tinta)">Entrega 3 — <em>cómo se fabrica, con detalle</em></h2>
   <p class="dato">8 % de la nota · 15 páginas de contenido · un solo PDF sobre la plantilla</p>
-  <p class="plazo">Fecha de entrega <b>por confirmar</b>. Se anunciará en Moovi.</p>
+  <p class="plazo"><span><b>Hasta el domingo 6 de diciembre, 23:50</b>, después del último seminario. Pasada esa hora, Moovi no admite la subida.</span></p>
+
+  <h2>Esta semana, en el seminario <span class="peso">Lo comprobamos juntos antes de que os vayáis</span></h2>
+  <ol>
+    <li><b>Un sprint para la E3</b> en vuestro tablero de Jira, <b>iniciado</b>, que termine el <b>domingo 6 de diciembre</b>, después del último seminario.</li>
+    <li><b>Una tarea por integrante</b>, asignada a su <b>cuenta personal</b> (no a la del grupo) y <b>dentro del sprint</b>. La puede mover otro compañero, pero tiene que estar en el sprint: una tarea fuera del sprint no cuenta.</li>
+    <li><b>Un documento vivo del equipo</b> en Confluence, publicado (no en borrador).</li>
+    <li><b>Un documento vivo por integrante</b>, como subpágina del documento del equipo, publicado y sin restricciones. No vale el espacio personal: no lo veo.</li>
+    <li><b>Acceso del profesor</b> con la cuenta <b>glareo@cud.uvigo.es</b> al tablero y a todas las páginas, las del equipo y las individuales. Lo abro yo en el seminario: si no lo veo, se arregla allí mismo.</li>
+  </ol>
+  <div class="avisos">
+    <ul>
+      <li><b>La huella cuenta.</b> No hace falta un mínimo de días (vale uno), pero cada integrante escribe en su página con su cuenta. Un copia-pega en Confluence no es huella: <b>se comprueba con un script</b>.</li>
+    </ul>
+  </div>
 
   <h2>Lo primero de todo</h2>
   <div class="caja">
@@ -587,6 +600,10 @@ li::marker{color:var(--azul);font-weight:700}
     <li><label><input type="checkbox" id="e3c8"><span>Anexo de prompts y qué hubo que corregir</span></label></li>
     <li><label><input type="checkbox" id="e3c9"><span>Quince páginas de contenido o menos</span></label></li>
     <li><label><input type="checkbox" id="e3c10"><span>Todo firmado en Confluence</span></label></li>
+    <li><label><input type="checkbox" id="e3c11"><span>Sprint de la E3 iniciado, con fin el 6 de diciembre</span></label></li>
+    <li><label><input type="checkbox" id="e3c12"><span>Una tarea por integrante, con su cuenta y dentro del sprint</span></label></li>
+    <li><label><input type="checkbox" id="e3c13"><span>Documento vivo del equipo y uno por integrante, publicados</span></label></li>
+    <li><label><input type="checkbox" id="e3c14"><span>glareo@cud.uvigo.es ve el tablero y todas las páginas</span></label></li>
   </ul>
   <button class="reset" data-reset="e3">Desmarcar todo</button>
 
@@ -599,6 +616,9 @@ li::marker{color:var(--azul);font-weight:700}
       <li>Repartir el trabajo por capítulos en vez de por decisiones.</li>
       <li>No declarar el uso de la IA, o declarar un solo nivel para todo el grupo.</li>
     </ul>
+  </div>
+  <div class="caja" style="margin-top:20px">
+    <p><b>Se entrega</b> un solo PDF en Moovi, llamado E3 + vuestro grupo + FSTF2627 —por ejemplo <b>E3G11FSTF2627.pdf</b>—, con <b>el enlace a vuestra página de Confluence y el enlace a vuestro Jira en la primera página</b>. Lo que no esté firmado en Confluence no se evalúa, y el <b>historial de versiones</b> es la prueba de quién hizo qué.</p>
   </div>
   <div class="naval"><p>⚓ Si tenéis una duda que no resuelve esta hoja, preguntadla en clase o en el seminario. Una duda resuelta tarde es una entrega corregida a la baja.</p></div>
 </section>
@@ -614,7 +634,7 @@ li::marker{color:var(--azul);font-weight:700}
 
 <script>
 (function(){
-  var vistas = ['e2'];   // E3 oculta de momento: añade 'e3' para reactivarla
+  var vistas = ['e2', 'e3'];
   function mostrar(id, guardar){
     vistas.forEach(function(v){
       var sec = document.getElementById(v), tab = document.getElementById('tab-'+v);
@@ -632,9 +652,9 @@ li::marker{color:var(--azul);font-weight:700}
   });
   var inicial = (location.hash || '').replace('#','');
   if (vistas.indexOf(inicial) === -1) {
-    try { inicial = localStorage.getItem('tt-vista') || 'e2'; } catch(e){ inicial = 'e2'; }
+    try { inicial = localStorage.getItem('tt-vista') || 'e3'; } catch(e){ inicial = 'e3'; }
   }
-  mostrar(vistas.indexOf(inicial) === -1 ? 'e2' : inicial, false);
+  mostrar(vistas.indexOf(inicial) === -1 ? 'e3' : inicial, false);
 
   // casillas: se recuerdan solo en este móvil
   var cajas = document.querySelectorAll('.check input');
