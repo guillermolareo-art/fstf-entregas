@@ -62,6 +62,18 @@ nav button.on{background:var(--azul);border-color:var(--azul);color:#fff}
 .login input{width:100%;font:inherit;font-size:17px;padding:10px;border:1px solid var(--borde);border-radius:6px;margin:8px 0}
 nav[hidden]{display:none!important}
 .prof{display:block;text-align:right;margin-top:40px;font-size:12px;color:#A6A6A6;cursor:pointer}
+/* modo oscuro automatico: sigue al sistema, misma paleta que la guia */
+@media (prefers-color-scheme:dark){
+:root{color-scheme:dark;--gris:#9FACBC;--borde:#2A3542;--suave:#1A212A;--palido:#17293A}
+body{background:#10151B;color:#E8ECF2}
+header{background:#060D16;border-bottom:1px solid var(--borde)}
+nav{background:#10151B}
+nav button,.btn{color:#E8ECF2}
+.total{background:#060D16;border:1px solid var(--borde)}
+.e3{background:#2B1D12;color:#F4D9BE}
+.qr svg{background:#fff;border-radius:6px}
+.login p{color:#E88E7C!important}
+}
 </style></head><body>
 <header><small>FSTF 2026-2027 · TRABAJO TUTELADO</small><h1>Feedback de la Entrega 2</h1></header><nav id="nav" hidden></nav><main id="m"><p>Abriendo…</p></main>
 <script>
